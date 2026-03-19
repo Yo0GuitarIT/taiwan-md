@@ -170,9 +170,30 @@ const navConfig = [
         </a>
         <button class="menu-toggle" aria-label="開啟/關閉導航選單" onclick="document.querySelector('.nav-mobile').classList.toggle('open')">☰</button>
         <nav class="nav-desktop" aria-label="主要導航">
-          {navConfig.map(item => (
-            <a href={item.fullPath} class:list={["nav-link", { active: item.active }]}>{item.label}</a>
-          ))}
+          {navConfig.map(item => {
+            if (item.path === '/#categories') {
+              return (
+                <div class="nav-dropdown">
+                  <a href={item.fullPath} class:list={["nav-link", { active: item.active }]}>{item.label} <span class="dropdown-arrow">▾</span></a>
+                  <div class="dropdown-menu">
+                    <a href={isEn ? "/en/history" : "/history"} class="dropdown-item">📜 {isEn ? 'History' : '歷史'}</a>
+                    <a href={isEn ? "/en/geography" : "/geography"} class="dropdown-item">🗺️ {isEn ? 'Geography' : '地理'}</a>
+                    <a href={isEn ? "/en/culture" : "/culture"} class="dropdown-item">🎭 {isEn ? 'Culture' : '文化'}</a>
+                    <a href={isEn ? "/en/food" : "/food"} class="dropdown-item">🍜 {isEn ? 'Food' : '美食'}</a>
+                    <a href={isEn ? "/en/art" : "/art"} class="dropdown-item">🎨 {isEn ? 'Art' : '藝術'}</a>
+                    <a href={isEn ? "/en/music" : "/music"} class="dropdown-item">🎵 {isEn ? 'Music' : '音樂'}</a>
+                    <a href={isEn ? "/en/technology" : "/technology"} class="dropdown-item">💻 {isEn ? 'Technology' : '科技'}</a>
+                    <a href={isEn ? "/en/nature" : "/nature"} class="dropdown-item">🌿 {isEn ? 'Nature' : '自然'}</a>
+                    <a href={isEn ? "/en/people" : "/people"} class="dropdown-item">👥 {isEn ? 'People' : '人物'}</a>
+                    <a href={isEn ? "/en/society" : "/society"} class="dropdown-item">🏛️ {isEn ? 'Society' : '社會'}</a>
+                    <a href={isEn ? "/en/economy" : "/economy"} class="dropdown-item">📊 {isEn ? 'Economy' : '經濟'}</a>
+                    <a href={isEn ? "/en/lifestyle" : "/lifestyle"} class="dropdown-item">🏠 {isEn ? 'Lifestyle' : '生活'}</a>
+                  </div>
+                </div>
+              );
+            }
+            return <a href={item.fullPath} class:list={["nav-link", { active: item.active }]}>{item.label}</a>;
+          })}
           <a href="https://github.com/frank890417/taiwan-md" target="_blank" class="nav-link gh">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
             GitHub
@@ -514,6 +535,47 @@ const navConfig = [
     gap: 0.35rem;
     margin-left: auto;
   }
+  /* Dropdown */
+  .nav-dropdown {
+    position: relative;
+  }
+  .dropdown-arrow {
+    font-size: 0.65em;
+    opacity: 0.5;
+    margin-left: 2px;
+  }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(167, 196, 160, 0.4);
+    border-radius: 12px;
+    padding: 0.5rem 0;
+    min-width: 160px;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+    z-index: 1000;
+  }
+  .nav-dropdown:hover .dropdown-menu {
+    display: block;
+  }
+  .dropdown-item {
+    display: block;
+    padding: 0.45rem 1.1rem;
+    color: #2D5016;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background 0.15s ease;
+  }
+  .dropdown-item:hover {
+    background: rgba(74, 124, 89, 0.08);
+  }
+
   .nav-link {
     text-decoration: none;
     color: #475569;
