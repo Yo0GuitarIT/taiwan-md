@@ -339,14 +339,100 @@ bun run preview
 
 ---
 
-## 🎖️ 貢獻者認可
+## 🎖️ 貢獻者進化路徑
 
-### 貢獻類型
-- **內容創作者**：撰寫原創文章
-- **翻譯志工**：多語言內容建置
-- **技術開發者**：功能開發和優化
-- **設計師**：視覺和互動設計
-- **審查員**：內容品質把關
+Taiwan.md 採用**漸進式信任**的模式。每個人都從 Contributor 開始，透過實際貢獻逐步升級。
+
+### Lv.1 🌱 Contributor（貢獻者）
+
+**進入門檻：** 提交第一個 PR 並被 merge
+
+**可以做：**
+- 撰寫新文章、修正錯誤、翻譯
+- 在 Issues 討論和提案
+- Fork repo 提交 PR
+
+**升級條件 → Lv.2：**
+- 累計 **3+ 個被 merge 的 PR**
+- 內容品質穩定（無重大事實錯誤需修正）
+- PR 符合 EDITORIAL.md 文風要求（無嚴重塑膠味）
+
+---
+
+### Lv.2 🌿 Trusted Contributor（受信任貢獻者）
+
+**進入門檻：** 通過 Lv.1 升級條件，由現有 Maintainer 邀請
+
+**新增權限：**
+- GitHub repo **Triage 權限**（可管理 Issues 標籤、指派）
+- PR review 建議權（comment review，無 approve/merge 權）
+- 被列入 README 的 Trusted Contributors 區
+
+**可以做：**
+- 幫忙分類和回覆 Issues
+- 對其他人的 PR 提出 review 建議
+- 參與 EDITORIAL.md 討論和制定
+
+**升級條件 → Lv.3：**
+- 累計 **10+ 個被 merge 的 PR**
+- 至少 **2 個不同分類**的內容貢獻（例如音樂 + 美食）
+- 曾參與 **3+ 個 PR review**（提出有建設性的意見）
+- 活躍期至少 **1 個月**
+- 由 2 位現有 Maintainer 同意
+
+---
+
+### Lv.3 🌳 Maintainer（維護者）
+
+**進入門檻：** 通過 Lv.2 升級條件，由 Core Team 正式邀請
+
+**新增權限：**
+- **Merge PR** 權限（Write access）
+- **Approve review** 權限
+- 管理 Issues（close、label、milestone）
+- 參與 Roadmap 和技術決策
+
+**職責：**
+- 每週至少 review **2 個 PR**
+- 確保被 merge 的內容符合 EDITORIAL.md 標準
+- 回覆社群 Issues（72 小時內至少有初步回應）
+- 參與每月一次的 Maintainer 會議（async 也行）
+
+**注意事項：**
+- Maintainer 不自己 merge 自己的 PR（需另一位 Maintainer review）
+- 超過 30 天無活動會被標記 inactive，60 天後自動降級為 Trusted Contributor
+- 可隨時主動申請降級或休假（不是什麼丟臉的事）
+
+---
+
+### Lv.4 🏔️ Core Team（核心團隊）
+
+**進入方式：** 由創辦人邀請
+
+**權限：**
+- 所有 Maintainer 權限
+- Repo Admin 權限（settings、branch protection）
+- 編輯方針最終決策權
+- 贊助與合作洽談
+
+**現任 Core Team：**
+- **吳哲宇 (@frank890417)** — 創辦人
+
+---
+
+### 專業角色（跨等級）
+
+除了等級制度，Taiwan.md 也歡迎特定專業的貢獻者：
+
+| 角色 | 描述 | 從哪個等級開始 |
+|------|------|--------------|
+| 🌐 翻譯官 | 負責特定語言翻譯 | Lv.1 起 |
+| 🔍 事實查核員 | 驗證文章引用和數據 | Lv.2 起 |
+| 🎨 前端開發 | 網站功能和 UI 改善 | Lv.1 起 |
+| 🤖 AI/Data | Agentic Workflow、語料整合 | Lv.2 起 |
+| 📸 媒體貢獻者 | CC 授權照片、圖表 | Lv.1 起 |
+
+---
 
 ### 認可方式
 - **README 感謝名單**：所有貢獻者都會被列出
