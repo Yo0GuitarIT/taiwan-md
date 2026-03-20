@@ -527,57 +527,69 @@ import ProticoScript from '../components/ProticoScript.astro';
       <div class="sponsors-inner">
         <h2>🤝 贊助與合作夥伴</h2>
         <p class="sponsors-desc">
-          Taiwan.md 是非營利的社群開源專案。我們的營運仰賴贊助者的支持。<br>
-          您的 Logo 將出現在網站、GitHub README 和所有公開場合。
+          Taiwan.md 是非營利的社群開源專案。<br>
+          我們相信，每一種貢獻都是讓世界認識台灣的方式。
         </p>
 
         <div class="sponsor-tiers">
           <div class="tier">
-            <h3 class="tier-name gold">🥇 Gold Sponsor</h3>
-            <p class="tier-price">NT$150,000 / 年</p>
-            <p class="tier-desc">About 頁大 Logo、README 專區、社群媒體致謝、季度影響力報告</p>
+            <h3 class="tier-name gold">🥇 核心夥伴 Core Partner</h3>
+            <p class="tier-desc">深度參與專案發展，提供關鍵基礎設施或長期資源支持</p>
+            <p class="tier-perks">About 頁大 Logo・README 專區・社群媒體致謝・季度影響力報告</p>
             <div class="tier-logos">
-              <div class="logo-placeholder">Your Logo Here</div>
+              <div class="logo-placeholder">成為第一位核心夥伴</div>
             </div>
           </div>
 
           <div class="tier">
-            <h3 class="tier-name silver">🥈 Silver Sponsor</h3>
-            <p class="tier-price">NT$50,000 / 年</p>
-            <p class="tier-desc">About 頁 Logo、README 致謝</p>
+            <h3 class="tier-name silver">🥈 專業夥伴 Professional Partner</h3>
+            <p class="tier-desc">以專業能力或產品服務，直接提升 Taiwan.md 的品質與體驗</p>
+            <p class="tier-perks">About 頁 Logo・README 致謝・貢獻故事專欄</p>
             <div class="tier-logos">
-              <a href="https://justfont.com" target="_blank" rel="noopener noreferrer" class="sponsor-logo-link">
-                <img src="/images/justfont-logo.svg" alt="justfont" class="sponsor-logo-img" style="height: 28px;" />
-              </a>
-              <p class="sponsor-contribution">贊助 Webfont 方案，讓更多人看見台灣的美好</p>
+              <div class="sponsor-card">
+                <a href="https://justfont.com" target="_blank" rel="noopener noreferrer" class="sponsor-logo-link">
+                  <img src="/images/justfont-logo.svg" alt="justfont" class="sponsor-logo-img" style="height: 28px;" />
+                </a>
+                <div class="sponsor-story">
+                  <p class="sponsor-contribution-title">✍️ 字體，是文化最安靜的聲音</p>
+                  <p class="sponsor-contribution">
+                    一個關於台灣的知識庫，值得用台灣的字體來書寫。justfont 贊助了 Webfont 方案，
+                    讓蘭陽明體的溫潤、柑仔蜜的台味、日星宋體的歷史重量，成為每一篇文章的第一印象。
+                    字體不只是排版工具——它承載著一個文化看待自己的方式。
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
           <div class="tier">
-            <h3 class="tier-name bronze">🥉 Bronze Sponsor</h3>
-            <p class="tier-price">NT$20,000 / 年</p>
-            <p class="tier-desc">About 頁文字致謝、README 列名</p>
-            <div class="tier-logos">
-              <div class="logo-placeholder sm">Your Name Here</div>
-            </div>
-          </div>
-
-          <div class="tier">
-            <h3 class="tier-name community">💚 Community Supporter</h3>
-            <p class="tier-price">NT$500+ / 月</p>
-            <p class="tier-desc">個人贊助者，README 感謝名單</p>
+            <h3 class="tier-name bronze">🥉 社群夥伴 Community Partner</h3>
+            <p class="tier-desc">以工具、服務或資源支持社群運作與使用者體驗</p>
+            <p class="tier-perks">About 頁文字致謝・README 列名</p>
             <div class="tier-logos">
               <a href="https://protico.io" target="_blank" class="supporter-link">
-                <strong>Protico</strong> — Howie Young
+                <strong>Protico</strong> — 提供社群即時聊天功能，讓讀者與貢獻者能直接交流
+              </a>
+            </div>
+          </div>
+
+          <div class="tier">
+            <h3 class="tier-name community">💚 個人支持者 Individual Supporter</h3>
+            <p class="tier-desc">以個人力量支持專案永續運作</p>
+            <p class="tier-perks">README 感謝名單</p>
+            <div class="tier-logos">
+              <a href="https://github.com/howieyoung" target="_blank" class="supporter-link">
+                <strong>Howie Young</strong> — Protico 創辦人，同時以個人身份贊助
               </a>
             </div>
           </div>
         </div>
 
         <div class="sponsor-cta">
-          <h3>想成為贊助者？</h3>
+          <h3>想一起讓世界認識台灣？</h3>
           <p>
-            無論是企業或個人，我們都歡迎您的支持。贊助方案可依需求客製化。
+            不論是企業產品、專業服務、還是個人支持，我們歡迎任何形式的合作。<br>
+            贊助方案依貢獻內容客製，不以金額定義價值。
           </p>
           <div class="sponsor-contact">
             <a href="mailto:cheyu.wu@monoame.com?subject=Taiwan.md 贊助合作詢問" class="btn btn-primary">
@@ -1536,7 +1548,7 @@ import ProticoScript from '../components/ProticoScript.astro';
   .tier-name.silver { color: #64748b; }
   .tier-name.bronze { color: #92400e; }
   .tier-name.community { color: #15803d; }
-  .tier-price { font-size: 1.1rem; font-weight: 700; color: #2D5016; margin-bottom: 0.4rem; }
+  /* .tier-price removed — tiers now based on contribution, not amount */
   .tier-desc { font-size: 0.85rem; color: #64748b; margin-bottom: 1rem; }
   .tier-logos { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
   .sponsor-logo-link {
@@ -1551,11 +1563,36 @@ import ProticoScript from '../components/ProticoScript.astro';
   }
   .sponsor-logo-link:hover { background: #f1f5f9; border-color: #cbd5e1; }
   .sponsor-logo-img { height: 28px; width: auto; }
+  .sponsor-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+  }
+  .sponsor-story {
+    text-align: left;
+    max-width: 480px;
+  }
+  .sponsor-contribution-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 0.4rem;
+  }
   .sponsor-contribution {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     color: #64748b;
-    margin-top: 0.5rem;
-    font-style: italic;
+    line-height: 1.7;
+  }
+  .tier-perks {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    margin-top: -0.3rem;
+    margin-bottom: 0.8rem;
   }
   .logo-placeholder {
     padding: 1.25rem 1.5rem;
