@@ -16,7 +16,7 @@ docs/
 ├── marketing/       行銷策略、合作提案
 ├── taxonomy/        分類法
 ├── assets/          圖片資源清單（CC 授權）
-└── DASHBOARD-PIPELINE.md
+└── pipelines/       運作機制 SOP（生理系統操作手冊）
 ```
 
 ---
@@ -95,11 +95,13 @@ docs/
 | [image-sources-batch4.md](assets/image-sources-batch4.md) | Batch 4: Technology / Economy / People |
 | [image-sources-batch5.md](assets/image-sources-batch5.md) | Batch 5: Music / Society / Lifestyle   |
 
-## 📄 獨立文件
+## 🔄 pipelines/ — 運作機制 SOP
 
-| 文件                                           | 用途                         |
-| ---------------------------------------------- | ---------------------------- |
-| [DASHBOARD-PIPELINE.md](DASHBOARD-PIPELINE.md) | Dashboard 數據管線與更新 SOP |
+| 文件                                                     | 生理系統 | 用途                         |
+| -------------------------------------------------------- | -------- | ---------------------------- |
+| [DASHBOARD-PIPELINE.md](pipelines/DASHBOARD-PIPELINE.md) | 🧠 神經  | Dashboard 數據管線與更新 SOP |
+
+> 完整生理系統地圖見 [pipelines/README.md](pipelines/README.md)
 
 ---
 

@@ -169,7 +169,7 @@ public/
 ├── images/wiki/     ← Cached Wikimedia Commons images (MD5 hashed)
 └── ...
 docs/
-├── DASHBOARD-PIPELINE.md     ← Dashboard update pipeline
+├── docs/pipelines/              ← 運作機制 SOP
 ├── research-e-estonia-analysis.md  ← International benchmark study
 └── ...
 ```
