@@ -309,10 +309,57 @@ renderer.image = ({ href, title, text }) => {
   return `<img src="${href}" alt="${text || ''}"${titleAttr} loading="lazy" onerror="this.onerror=null;this.classList.add('img-broken')" />`;
 };
 
-const processedContent = marked.parse(resolveWikilinks(content), {
-  renderer,
-  breaks: true,
-}) as string;
+// ── Footnote preprocessor (GFM-compatible [^n] syntax) ──────────────────────
+function processFootnotes(md: string): string {
+  // Collect footnote definitions: [^label]: content (may span rest of line)
+  const definitions: Record<string, string> = {};
+  const defRegex = /^\[\^([^\]]+)\]:\s*(.+?)(?=\n\[\^|\n\n|\n#|\n---|\s*$)/gms;
+  let m: RegExpExecArray | null;
+  while ((m = defRegex.exec(md)) !== null) {
+    definitions[m[1]] = m[2].trim();
+  }
+  if (Object.keys(definitions).length === 0) return md;
+
+  // Order of first use in the text
+  const order: string[] = [];
+  let body = md.replace(defRegex, ''); // remove definitions from body
+
+  // Replace inline refs [^label] → superscript HTML
+  body = body.replace(/\[(\^[^\]]+)\](?!:)/g, (_, raw) => {
+    const label = raw.slice(1); // strip leading ^
+    if (!definitions[label]) return `[${raw}]`;
+    if (!order.includes(label)) order.push(label);
+    const num = order.indexOf(label) + 1;
+    const id = `fn-${label}`;
+    const refId = `fnref-${label}`;
+    return `<sup id="${refId}"><a href="#${id}" class="footnote-ref" aria-label="脚注 ${num}">${num}</a></sup>`;
+  });
+
+  // Build footnotes section
+  if (order.length > 0) {
+    const items = order.map((label, i) => {
+      const num = i + 1;
+      const id = `fn-${label}`;
+      const refId = `fnref-${label}`;
+      // Process links inside footnote text via marked inline parser
+      const defHtml = marked.parseInline(definitions[label]) as string;
+      return `<li id="${id}">${defHtml}<a href="#${refId}" class="footnote-backref" aria-label="返回引用 ${num}">↩</a></li>`;
+    });
+    body =
+      body.trimEnd() +
+      `\n\n<section class="footnotes" aria-label="腳注"><ol>${items.join('')}</ol></section>`;
+  }
+
+  return body;
+}
+
+const processedContent = marked.parse(
+  processFootnotes(resolveWikilinks(content)),
+  {
+    renderer,
+    breaks: true,
+  },
+) as string;
 
 // ── Estimate reading time if not in frontmatter ────────────────────────────────
 const estimatedReadingTime =
@@ -373,14 +420,21 @@ const encodedTitle = encodeURIComponent(title);
               </span>
             )
           }
-          <a href={`/${category}`} class="meta-category-link" style={`color:${categoryInfo.color};`}>
+          <a
+            href={`/${category}`}
+            class="meta-category-link"
+            style={`color:${categoryInfo.color};`}
+          >
             {categoryInfo.name}
           </a>
           {
             frontmatter.subcategory && (
               <>
                 <span class="meta-separator">›</span>
-                <span class="meta-subcategory" style={`color:${categoryInfo.color}; background:${categoryInfo.colorLight};`}>
+                <span
+                  class="meta-subcategory"
+                  style={`color:${categoryInfo.color}; background:${categoryInfo.colorLight};`}
+                >
                   {frontmatter.subcategory}
                 </span>
               </>
@@ -881,7 +935,9 @@ const encodedTitle = encodeURIComponent(title);
     text-decoration: none;
     transition: opacity 0.15s;
   }
-  .meta-category-link:hover { opacity: 0.7; }
+  .meta-category-link:hover {
+    opacity: 0.7;
+  }
 
   .meta-separator {
     font-size: 0.85rem;
@@ -1054,6 +1110,103 @@ const encodedTitle = encodeURIComponent(title);
     border: none;
     border-top: 1px solid rgba(26, 60, 52, 0.1);
     margin: 3rem 0;
+  }
+
+  /* ── Footnotes ──────────────────────────────────────────────────────────── */
+
+  /* Footnote section (文末 section.footnotes) */
+  .prose :global(.footnotes) {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #6b7280;
+  }
+
+  .prose :global(.footnotes ol) {
+    padding-left: 1.5rem;
+    margin: 0;
+  }
+
+  .prose :global(.footnotes li) {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  .prose :global(.footnotes li p) {
+    display: inline;
+    margin: 0;
+    color: #6b7280;
+  }
+
+  .prose :global(.footnotes a) {
+    color: #6b7280;
+    text-decoration: underline;
+    text-decoration-color: rgba(107, 114, 128, 0.4);
+    text-underline-offset: 2px;
+  }
+  .prose :global(.footnotes a:hover) {
+    color: #374151;
+    text-decoration-color: #6b7280;
+  }
+
+  /* Inline superscript footnote reference */
+  .prose :global(sup) {
+    line-height: 0; /* don't affect line-height */
+    font-size: 0.75em;
+    vertical-align: super;
+  }
+
+  .prose :global(.footnote-ref) {
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: none;
+    padding: 0 0.05em;
+    transition:
+      color 0.15s,
+      text-decoration-color 0.15s;
+  }
+  .prose :global(.footnote-ref:hover) {
+    color: #1d4ed8;
+    text-decoration: underline;
+    text-decoration-color: #2563eb;
+  }
+
+  /* Back-arrow (↩) */
+  .prose :global(.footnote-backref) {
+    margin-left: 0.35em;
+    color: #9ca3af;
+    font-size: 0.9em;
+    text-decoration: none;
+    border-bottom: none;
+    transition: color 0.15s;
+  }
+  .prose :global(.footnote-backref:hover) {
+    color: #6b7280;
+    text-decoration: none;
+  }
+
+  /* Mobile: bigger tap targets */
+  @media (max-width: 768px) {
+    .prose :global(.footnote-ref) {
+      padding: 0.5rem 0.3rem;
+      margin: -0.5rem -0.3rem;
+    }
+    .prose :global(.footnote-backref) {
+      padding: 0.5rem 0.4rem;
+      margin: -0.5rem -0.4rem;
+      display: inline-block;
+      min-width: 44px;
+      min-height: 44px;
+      line-height: 44px;
+      text-align: center;
+    }
+    .prose :global(.footnotes) {
+      margin-left: -0.25rem;
+      margin-right: -0.25rem;
+    }
   }
 
   /* ── Sources ───────────────────────────────────────────────────────────── */
