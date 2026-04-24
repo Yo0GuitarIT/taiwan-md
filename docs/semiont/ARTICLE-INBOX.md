@@ -157,15 +157,21 @@ BECOME_TAIWANMD.md Step 5 新增：
 <!-- 福爾摩沙鳥類學 Stage 1 agent 只 web search 沒碰本地 NMTH 資料被發現。 -->
 <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
 
+<!-- 福爾摩沙鳥類學 已完成 2026-04-24 β4 → ARTICLE-DONE-LOG.md（NMTH 12 篇 batch #1/12）-->
+<!-- 以下條目留歷史紀錄但 status = done；實際內容已搬 DONE-LOG。-->
+
 ### 福爾摩沙鳥類學
 
 - **Type**: `NEW`
 - **Category**: Nature（重分類：比 History 更貼近；參考 knowledge/Nature/台灣島嶼博物學.md 鄰接主題）
 - **Priority**: `P1`
-- **Status**: `in-progress`
+- **Status**: `done` ✅
 - **Requested**: 2026-04-12 by NMTH peer-ingestion analysis（2026-04-24 β4 補進 INBOX）
+- **Done**: 2026-04-24 β4 → [knowledge/Nature/福爾摩沙鳥類學.md](../../knowledge/Nature/福爾摩沙鳥類學.md) + [research report](../../reports/research/2026-04/福爾摩沙鳥類學.md) — commit `14c688eb`
 - **Dev log**:
   - 2026-04-24 β4: 從 INBOX 挑出，NMTH 12 篇 batch 第 1 篇，開始 Stage 1 research
+  - 2026-04-24 β4: Stage 1 agent 只 web search 被 callout，補跑 NMTH local primary source supplement（§13）
+  - 2026-04-24 β4: Stage 2-6 完整走完，Stage 3.5/3.6 抓到 4 處 hallucination（肉壞夏天、台語華雞、黑色尾羽、買下羽毛動作、年齡±1），全部修正；ship commit `14c688eb`
 - **Notes**:
   - 系列 A-2（史溫侯系列第 2 篇，接 A-1 史溫侯人物條目）
   - 物件先行：史溫侯 1863 _The Ornithology of Formosa_ 學術論文 + 採集標本現存大英博物館

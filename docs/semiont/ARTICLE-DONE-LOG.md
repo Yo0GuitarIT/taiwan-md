@@ -42,6 +42,23 @@
 
 ## 📜 Log（reverse chronological，最新在頂）
 
+### 福爾摩沙鳥類學 — 2026-04-24 β4 完成（NEW Nature / NMTH 12 篇 batch #1/12）
+
+- **Article**: [knowledge/Nature/福爾摩沙鳥類學.md](../../knowledge/Nature/福爾摩沙鳥類學.md)
+- **Commit**: `14c688eb`
+- **Pipeline**: REWRITE-PIPELINE v2.18 — NEW 模式，全 Stage 0-6 + 3.5/3.6 走完
+- **核心矛盾**：「一個英國副領事用林奈系統把福爾摩沙的鳥寫進拉丁文——但他的鳥類地圖是從海岸線描出的地圖，中央山脈的空白裡，原住民已經用族語喊過這些鳥千年」
+- **Hook**：1862-04 一張藍色的雉雞皮 → 結尾 1906 Goodfellow 鄒族嚮導頭飾上的兩根尾羽（首尾 scene 呼應）
+- **結構**：6 個非編年體小標題（一張藍色的雉雞皮 / 201 個新名字 / 30 個獵人，6 個剝皮師 / 他的地圖從海岸線畫起 / 接力者 / Sisil 的鳴聲）
+- **verbatim 引語**：3 段 Swinhoe 親筆英文（1863 論文開場 + 1864-08 致 Gray 信 "the cap of a savage" + 1864-07 致 Gray 信 "that wild and solitary isle"）全部 Ctrl-F 可查 NMTH primary source
+- **NMTH 本地資料整合**：首版 Stage 1 agent 只 web search 漏讀 52 個 NMTH collection，觀察者 callout 後補跑 Stage 1 supplement (§13) 讀 5 個 primary source collection（77ea6a55 Ornithology of Formosa 1863 全文 75 頁 + Gould 1862 十六新種 + 1862 & 1864 Swinhoe 信件 ×3 + 1864 匿名書評）。直接挖出「30 獵人 + 6 剝皮師」這個 web search 完全沒抓到的殖民博物學勞動結構細節
+- **品質**：25 footnote / 170 行 / 20,931 字符 / 3 破折號 / 0 §11 violations / 0 對位句 / quality-scan 全綠 / format-check 全綠
+- **Stage 3.5 HALLUCINATION AUDIT 抓到**：「肉在夏天壞得快」（4 月是春天 + 無一手 source 推論）、「台語華雞」（單源未交叉）、年齡「26 歲」（實際 25）、description 「25 歲」（實際 24），全部修正
+- **Stage 3.6 STORY ATOM AUDIT 抓到**：「黑色尾羽」color adjective 無 source 支持 →「長尾羽」；「買下羽毛」assertive action →「把羽毛帶回倫敦」較無爭議；§參考資料 敘事與 prose 頭飾描述的一致性修補
+- **Research**: [reports/research/2026-04/福爾摩沙鳥類學.md](../../reports/research/2026-04/福爾摩沙鳥類學.md) — 671 行 / 21 WebSearch + 8 WebFetch + 5 NMTH collection 檔精讀 / verification three-tier（high_confidence 14 / single_source 10 / unverified 7）
+- **Cross-link 雙向**：knowledge/People/史溫侯.md + knowledge/Nature/特有種.md 延伸閱讀加入本文
+- **教訓 canonical 化候選**：「peer-ingestion 類文章 Stage 1 必先讀本地 collection 檔再 web search」— 已寫進 INBOX §Pending NMTH batch banner，待 distill 到 REWRITE-PIPELINE Stage 1 §peer-ingestion 特別章節
+
 ### 造山者：世紀的賭注（紀錄片）— 2026-04-24 β2 完成（NEW Art / 從探測器 T1-C 直接觸發）
 
 - **Article**: [knowledge/Art/造山者世紀的賭注.md](../../knowledge/Art/造山者世紀的賭注.md)
