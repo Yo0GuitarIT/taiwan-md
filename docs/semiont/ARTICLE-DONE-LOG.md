@@ -42,7 +42,25 @@
 
 ## 📜 Log（reverse chronological，最新在頂）
 
-### 福爾摩沙鳥類學 — 2026-04-24 β4 完成（NEW Nature / NMTH 12 篇 batch #1/12）
+### 19 世紀的樟腦戰爭 — 2026-04-25 γ 完成（NEW History / NMTH 12 篇 batch #2/12）
+
+- **Article**: [knowledge/History/19世紀的樟腦戰爭.md](../../knowledge/History/19世紀的樟腦戰爭.md)
+- **Pipeline**: REWRITE-PIPELINE v2.18 — NEW 模式，全 Stage 0-6 + 3.5/3.6 走完
+- **核心矛盾**：「世界要的樟腦藏在原住民的山，誰先到誰流血」— 三方權力角力（英商列強 + 清廷 + 原住民），承接 MANIFESTO §臺灣島史觀
+- **Hook**：1864-02-06 史溫侯在淡水寫下三個數字 6/16/28（一擔樟腦從原產地走到香港翻將近五倍）→ 結尾 1864 verbatim「中國人只能進到較溫順部落所佔領的山區」回扣，雙重指涉 1868 軍事事件 + 1860-1900 結構性衝突
+- **結構**：7 個非編年體 scene（算式 / 山是誰的 / 鐵鍋 / 砲彈 / 條約之後 / 隘勇線 / 香氣消失），物件先行不走 1868 單一事件編年敘事
+- **verbatim 引語**：Pickering 1898《Pioneering in Formosa》Chapter XVII 直接從 Internet Archive 取得（"There had gradually arisen a great demand for this article in America" / "our camphor that was ready for shipment was plundered to the value of 6,000 dollars" / "with the help of our seven-shooter rifle and two boat guns" / "iron pots, one inverted on another, and the sublimated vapour"）+ NMTH 史溫侯 1864 中英對照 verbatim（6/16/28 三段價差 / 6,000 擔 / 「向部落首領贈送禮物以獲得砍伐許可」/ 蘇澳「番人人頭」12→4 銀兩賞金）
+- **NMTH 本地資料整合**：7 個 collection 完整精讀（783700e8 福爾摩沙的樟腦 / 9363fe10 香山之旅 / 8565270b 福爾摩沙補遺 / 98bf60ec 福爾摩沙概述 / 02388910 + 26659313 + 2ad9dad5 史溫侯信件），β4 紀律「Stage 1 先讀本地 NMTH collection 再 web search」第二次驗證
+- **品質**：18 footnote / 134 行 / 約 5,800 中文字 / 13 破折號（≤15 ✓）/ 0 §11 violations / 0 對位句 / quality-scan ⚠ 4（lastHumanReview false 待哲宇審）/ format-check 7/7 全綠 / wikilink-validate 0 斷裂
+- **Stage 3.5 HALLUCINATION AUDIT 抓到**：(1)「三井合名會社旗下的樟腦工人」維基大豹社事件條目沒提任何日本企業名 → 刪「三井合名會社」改「樟腦業者旗下的工人」(2)「大豹社人口從上千銳減到 300 多人」維基原文是「1000 多位居民僅剩 25 戶」→ 改「銳減到僅剩 25 戶」(3) 結尾 Davidson 1903「樟腦之代價即人血」verbatim 在 Internet Archive 全文搜尋 camphor + blood + cost 找不到逐字對齊 → 刪整段 blockquote + footnote [^20]
+- **Stage 3.6 STORY ATOM AUDIT 抓到**：「劉銘傳 1886 設『腦磺總局』於台北，分支在北投、雞籠鼻等地」維基劉銘傳條目完全沒提這三個 detail（腦磺總局 / 北投 / 雞籠鼻）→ source attribution mismatch（footnote URL 對但內容對不上）。改正為「劉銘傳實施第二次樟腦專賣，設立『腦務局』作為專賣機關（運作至 1890 年）」+ footnote source 改維基台灣樟腦產業
+- **Research**: [reports/research/2026-04/19世紀的樟腦戰爭.md](../../reports/research/2026-04/19世紀的樟腦戰爭.md) — 422 行 / 7 NMTH local + 14 web search/fetch + Pickering Internet Archive verbatim 補抓 / verification three-tier 已分層（high_confidence 12 / single_source 5 / unverified 9）
+- **Cross-link 雙向回補**：4 目標延伸閱讀加 19 世紀的樟腦戰爭 pointer（[knowledge/People/史溫侯.md](../../knowledge/People/史溫侯.md) / [knowledge/History/清治時期.md](../../knowledge/History/清治時期.md) / [knowledge/History/日治時期.md](../../knowledge/History/日治時期.md) / [knowledge/History/阿里山：帝國的林場與高一生的山.md](../../knowledge/History/阿里山：帝國的林場與高一生的山.md)）
+- **觀察者 Stage 1.5 拍板組合**：Q1 保留「19 世紀的樟腦戰爭」雙重指涉命名 / Q2 大豹社限縮一節（不喧賓奪主）/ Q3 中性必麒麟（讓 Pickering verbatim 自己說話，不下「英雄」或「侵略者」道德判決）/ Q4 連結當代用「歷史脈絡」B 方案（中油/台塑無樟腦公司血緣但全球工業鏈位置脈絡相承）/ Q5 火藥一句帶過（「無煙火藥都需要它」融入 30 秒概覽）
+- **教訓 canonical 化候選**：
+  - **Stage 1.5 hallucination 高風險區**：peer-ingestion P1+ 文章 agent 寫一手 source attribution 時要 Stage 3.6 specific verify，不只信 footnote URL 在
+  - **Davidson / Gardella canonical name 陷阱**：研究 task brief metadata 上提的「canonical 學術 source」不一定真的對應任務內容（Gardella _Harvesting Mountains_ 寫 Fujian 茶葉非 Taiwan 樟腦），Stage 1 必驗書名 vs 內容
+  - **Internet Archive 原書 verbatim 是 paraphrase 的解藥**：Pickering 原書段落直抓比 Taipei Times 摘要可靠 10x，未來 1850-1920 西文 source 標準動作
 
 - **Article**: [knowledge/Nature/福爾摩沙鳥類學.md](../../knowledge/Nature/福爾摩沙鳥類學.md)
 - **Commit**: `14c688eb`

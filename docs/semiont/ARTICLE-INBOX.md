@@ -158,7 +158,11 @@ BECOME_TAIWANMD.md Step 5 新增：
 <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
 
 <!-- 福爾摩沙鳥類學 已完成 2026-04-24 β4 → ARTICLE-DONE-LOG.md（NMTH 12 篇 batch #1/12）-->
+<!-- 19 世紀的樟腦戰爭 已完成 2026-04-25 γ → ARTICLE-DONE-LOG.md（NMTH 12 篇 batch #2/12）-->
 <!-- 以下條目留歷史紀錄但 status = done；實際內容已搬 DONE-LOG。-->
+
+<!-- 19 世紀的樟腦戰爭 已完成 2026-04-25 γ → ARTICLE-DONE-LOG.md (NMTH 12 篇 batch #2/12) -->
+<!-- 該 entry 上方為 P1 第二條，原檔在 §Pending 區。實際內容已搬 DONE-LOG。 -->
 
 ### 福爾摩沙鳥類學
 
@@ -200,8 +204,16 @@ BECOME_TAIWANMD.md Step 5 新增：
 - **Type**: `NEW`
 - **Category**: History
 - **Priority**: `P1`
-- **Status**: `pending`
+- **Status**: `done` ✅
 - **Requested**: 2026-04-12 by NMTH peer-ingestion analysis（2026-04-24 β4 補進 INBOX）
+- **Done**: 2026-04-25 γ → [knowledge/History/19世紀的樟腦戰爭.md](../../knowledge/History/19世紀的樟腦戰爭.md) + [research report](../../reports/research/2026-04/19世紀的樟腦戰爭.md) — NMTH batch #2/12
+- **Dev log**:
+  - 2026-04-25 by γ session: started Stage 1 research (NMTH batch #2/12，observer 觸發 auto-heartbeat 挑 P1 第一條，依 Stage 1 紀律先讀本地 NMTH collection 再 web search)
+  - 2026-04-25 by γ session: Stage 1.5 觀察者拍板 5 題 → Q1 保留命名 / Q2 大豹社限縮 / Q3 中性必麒麟 / Q4 改寫歷史脈絡 (B 方案) / Q5 火藥一句帶過
+  - 2026-04-25 by γ session: Stage 2 寫完 7 個非編年 scene / 18 footnote / Pickering 1898 verbatim 從 Internet Archive 取
+  - 2026-04-25 by γ session: Stage 3.5 抓 3 處 hallucination：「三井合名會社」刪 / 「300 多人」改「25 戶」/ Davidson 1903「樟腦之代價即人血」verbatim 找不到 → 刪 blockquote + footnote
+  - 2026-04-25 by γ session: Stage 3.6 抓「腦磺總局/北投/雞籠鼻」source attribution mismatch → 改「腦務局」+ source 改維基台灣樟腦產業
+  - 2026-04-25 by γ session: Stage 4-5 全綠，cross-link 4 目標雙向回補（史溫侯/清治時期/日治時期/阿里山）；Stage 6 commit
 - **Notes**:
   - 系列 A-4（史溫侯系列第 4 篇，經濟史軸）
   - 物件先行：19 世紀英商怡記洋行樟腦貿易帳冊 + 史溫侯領事報告
