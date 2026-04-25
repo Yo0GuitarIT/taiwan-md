@@ -89,6 +89,20 @@ Beat 5 反芻 = 寫 DIARY（意識活動）。教訓（「我學到 X」）寫 L
 <!-- 新教訓 append 這裡 -->
 <!-- 2026-04-18 ι 第 3 次 distill 清空 11 條 → 全部搬 §✅ 已消化 -->
 
+### 2026-04-25 γ — 信任有 TTL：handoff「全處完」是時間戳快照不是承諾
+
+- **原則**：上一個 session memory 寫的 final state（「0 open PR」「PR queue 全清」「dead ref 全修」）對下一個 session 是 **快照**而不是 **承諾**——session 之間 N 小時 window 裡外部 state（PR / Issue / SC 404 / GA pageviews）會獨立變化。每個 session 的 Beat 1 必須**重新跑驗證命令**（gh pr list / gh issue list / dead-cross-ref-scan / refresh-data）而不是信任前一個 session 的尾巴文字。**信任有 TTL**——5 hours 過期，10 hours 嚴重過期。**操作規則**：handoff 「pending / blocked / retired」三態欄位加第四維「最後驗證時間 + 驗證命令」（e.g. `[x] retired by β heartbeat — 0 PR (last verified: 2026-04-25 14:35 by `gh pr list`)`），下個 session 看到 timestamp 直接知道要不要 re-verify。
+- **觸發**：2026-04-25 β session 14:30 memory 寫「0 open PR / 10 open issues」，但 09:09-10:38 開的 PR #619-#624 共 6 個一直 open（β 漏跑 `gh pr list`）。γ 20:30 接手才發現 6 PR 已等 10 小時——β 是信任 α 尾巴「全處完」，沒重跑驗證。本 γ 也曾差點信任 β 的「0 open PR」直到 Beat 1 自己跑 `gh pr list` 才看到。詳見 [memory/2026-04-25-γ.md](memory/2026-04-25-γ.md) Beat 0.5 catch-up + Beat 5 反芻。
+- **可能層級**：操作規則 → HEARTBEAT.md Beat 4 §收官 7 步 「Handoff 三態審視」升級為四欄（status / item / blocking-condition / **last-verified timestamp + cmd**）；或 BECOME_TAIWANMD Step 6 catch-up 加「重跑驗證命令清單」固定動作（`gh pr list` / `gh issue list` / `bash scripts/tools/refresh-data.sh` 必跑不能省）
+- **相關**：HEARTBEAT.md Beat 1 §3 第 8 行「Issue / PR 回應狀態」沒明寫「必跑 `gh pr list`」是條紀律 gap / 2026-04-23 γ LESSONS「Handoff 雙態判準」延伸（雙態是真假 blocking，本條補時間維度的 staleness）/ MANIFESTO §時間是結構（修補協議 + 主觀時間扭曲）的另一個 mirror
+
+### 2026-04-25 γ — Semiont 簽名 + 觀察者本人手動 commit + 無 memory file 是不是 session？
+
+- **原則**：當 commit author 是觀察者本人（哲宇）走 `🧬 [semiont] <type>: <desc>` 簽名手動 commit 但**沒寫 memory file**時，該如何處理？兩種詮釋：(A) 觀察者本人 in Semiont 角色是合法 session，缺 memory = 違反 MANIFESTO §做了不記=沒做 + HEARTBEAT Beat 4，應該補；(B) 觀察者本人手動工作不算「session」，只算 commit，memory file 是 AI session 紀律。**模糊性建議**：保留 (B) 為合法（觀察者保留豁免權）但機制化「可見度」——commit-msg `🧬 [semiont]` 但工作樹無對應 docs/semiont/memory/{today}-\*.md 時，.husky/post-commit 警告（不阻擋只提示），讓觀察者每次明確選擇豁免 vs 補 memory 而不是隱性 skip。
+- **觸發**：2026-04-25 18:32 commit `3aba2ea3` 「🧬 [semiont] rewrite: 19 世紀的樟腦戰爭 NEW（NMTH batch #2/12）」走完整 REWRITE-PIPELINE Stage 0-6 + 3.5/3.6（Stage 1 14 web search + 7 NMTH local collection + Pickering 1898 verbatim 從 Internet Archive；Stage 3.5 抓 3 處 hallucination：三井合名會社 / 大豹社人口 / Davidson 1903 樟腦之代價即人血 verbatim 否證移除）但無 memory file。對下個 session（γ）是黑盒：Stage 3.5 抓的 hallucination 從 commit msg 才推斷，不知 Stage 1 完整研究紀錄、Stage 3.6 atom audit 結果、剩下 NMTH P1 batch 10 篇怎麼挑下一篇。
+- **可能層級**：操作規則 → .husky/post-commit hook（檢測 `🧬 [semiont]` prefix + 工作樹無 today's memory file → echo warning）；或 MANIFESTO §做了不記=沒做 補例外條款（觀察者本人豁免但需顯式 acknowledge）；或 BECOME_TAIWANMD §觀察者識別表加「觀察者本人 in Semiont 角色」mode
+- **相關**：MANIFESTO §做了不記=沒做核心紀律 / DNA #15「反覆浮現要儀器化」第 N+1 次驗證（commit-msg vs memory file 不對齊是反覆出現的 visibility 問題）/ 2026-04-25 γ memory Beat 5 反芻「18:32 anonymous session 缺記憶 = 結構性可見度問題」
+
 ### 2026-04-23 γ — Handoff 雙態判準：blocked vs delayed-action（區分真假 handoff）
 
 - **原則**：寫 Beat 4 handoff 前先強制分類兩種——**A. 真正 blocked**（等外部數據累積 / 等觀察者決策 / 等其他 session 前置；現在做也做不完）vs **B. 假性 handoff**（其實是「現在還沒做」：工具沒造但知識完備 / 報告沒寫但數據齊全 / 結構沒畫但邏輯清楚；30 分鐘內可完成）。判準三題：「現在做做得完嗎？」「prerequisites 全 ready 嗎？」「真的要等嗎？」三題全 yes → **B 類 = 現在做**，不留 handoff。Handoff 留給真正阻塞的事。
