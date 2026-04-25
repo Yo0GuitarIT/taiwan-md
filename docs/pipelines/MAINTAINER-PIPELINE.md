@@ -90,6 +90,43 @@
 - **核心**：每個投稿者都是花時間幫你的人，即使拒絕，也要讓人覺得被尊重
 - **不要**：官腔、模板化回覆、冷冰冰的「不符合標準」
 
+### ⚠️ 重複回應檢查（2026-04-25 β7 觀察者新增規則）
+
+**回應 issue / PR 之前，必須先檢查最新 comment 作者是否為 Taiwan.md 維護者本人**（frank890417 / Taiwan.md Contributors / 任何已 Taiwan.md identity 的回覆者）。判斷流程：
+
+```bash
+# 1 秒檢查指令
+gh issue view <N> --json comments -q '.comments[-1].author.login + " @ " + .comments[-1].createdAt'
+# 或 gh pr view <N> 同樣指令
+```
+
+**判斷規則**：
+
+| 最新 comment 狀態 | 處置 |
+| ----------------- | ---- |
+| 維護者剛回過、無新 contributor follow-up | **SKIP** — 不重複回應 |
+| 維護者回過、有新 contributor follow-up | 回應 follow-up（接續對話） |
+| 維護者從未回過 | 第一次回覆 |
+| 多 contributor 互相討論、維護者尚未介入 | 評估介入時機 |
+
+**為什麼**：2026-04-25 β7 session 觸發。同一個 audit 循環重複回應「謝謝建議、納入規劃」的罐頭式 reply 對 contributor 沒幫助、降低訊號雜訊比、也讓 issue 的 timeline 變混濁。維護者重複貼自己過去的話 = 對 contributor 誤導為「有新進度」實則沒有。
+
+**例外情境（即使最新是維護者也應重新回應）**：
+
+- 距上次維護者 reply ≥ 30 天 + 期間有實質進度（新功能、PR、決策） → 補進度更新
+- Issue 內容情境改變（被 #cite 別處、有人補 reproduction step、被外部討論引用）→ 補回應  
+- 觀察者明確要求「再去回覆 issue X」→ 執行（人類意圖 override 機械規則）
+
+**單一檢查指令**（建議在 audit batch 的開頭跑）：
+
+```bash
+for n in $(gh issue list --state open --json number -q '.[].number'); do
+  echo "#$n: $(gh issue view $n --json comments -q '.comments[-1].author.login // "no_comments"') @ $(gh issue view $n --json comments -q '.comments[-1].createdAt // ""')"
+done
+```
+
+對應 DNA #8「維護者信件要說謝謝」的延伸：感謝有 cooldown，重複貼相同感謝 = 雜訊。
+
 ---
 
 ## PR 審核策略
