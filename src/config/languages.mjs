@@ -46,8 +46,9 @@ export const LANGUAGES = [
     code: 'es',
     displayName: 'Español',
     hreflang: 'es',
-    enabled: false,
-    notes: 'Half-orphan: 36 articles in knowledge/es/ but no UI strings yet',
+    enabled: true,
+    notes:
+      '2026-04-25 enabled. 36 articles from knowledge/es/. UI fallback chain: es → en → zh-TW until es i18n keys are translated.',
   },
   {
     code: 'fr',

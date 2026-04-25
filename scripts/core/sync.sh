@@ -163,6 +163,25 @@ if [ -d "knowledge/fr" ]; then
   done
 fi
 
+# 同步西文內容（2026-04-25 enabled）
+echo "🇪🇸 同步西文內容..."
+if [ -d "knowledge/es" ]; then
+  for category in About Art Culture Economy Food Geography Lifestyle Music People History Nature Society Technology; do
+    if [ -d "knowledge/es/$category" ]; then
+      lowercase_category=$(echo $category | tr '[:upper:]' '[:lower:]')
+      mkdir -p "src/content/es/$lowercase_category"
+      for file in knowledge/es/$category/*.md; do
+        if [ -f "$file" ]; then
+          filename=$(basename "$file")
+          target_file="src/content/es/$lowercase_category/$filename"
+          cp "$file" "$target_file"
+          ((SYNCED_COUNT++))
+        fi
+      done
+    fi
+  done
+fi
+
 # 統計中間結果
 CONTENT_AFTER_SYNC=$(find src/content/ -name "*.md" | wc -l)
 
