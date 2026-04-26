@@ -42,6 +42,17 @@
 
 ## 📜 Log（reverse chronological，最新在頂）
 
+### 徐佳瑩 — 2026-04-26 γ 完成（NEW People / 陳建騏 dead cross-ref）
+
+- **Article**: [knowledge/People/徐佳瑩.md](../../knowledge/People/徐佳瑩.md)
+- **Pipeline**: REWRITE-PIPELINE v2.18 — NEW 模式，全 Stage 0-6 + 3.5/3.6 走完
+- **核心矛盾**：「被評分的冠軍，最後成了出題的人」— 從《超級星光大道》第三屆冠軍走到金曲歌后、單曲製作人與作曲人
+- **Hook**：2008 年第一次北上試鏡時差點買票回台中 → 結尾回到那張車票，寫成「心裡還有一首歌沒寫完」
+- **大事實修正**：inbox note 的「超偶第一屆」為誤寫；已修正為《超級星光大道》第三屆冠軍
+- **品質**：10 footnote / 152 行 / 0 §11 violations / wikilink ✅ / quality-scan ✅ / format-check 7/7 全綠
+- **Research**: [reports/research/2026-04/徐佳瑩.md](../../reports/research/2026-04/徐佳瑩.md)
+- **Cross-link**：解掉 [陳建騏](../../knowledge/People/陳建騏.md) 既有 dead cross-ref；延伸到林宥嘉、田馥甄、魏如萱、台灣綜藝
+
 ### 戰後台灣文學 EVOLVE — 2026-04-26 γ 完成（Issue #635 Phase 1/4）
 
 - **Article**: [knowledge/Art/戰後台灣文學.md](../../knowledge/Art/戰後台灣文學.md)
