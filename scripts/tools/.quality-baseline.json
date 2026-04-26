@@ -1,7 +1,9 @@
 {
   "version": "3.2",
-  "timestamp": "2026-04-25T02:14:21Z",
+  "timestamp": "2026-04-26T06:14:31Z",
   "total": 1,
   "flagged": 1,
-  "files": [{ "file": "knowledge/Music/台灣流行音樂.md", "score": 8 }]
+  "files": [
+    {"file": "knowledge/People/壞特.md", "score": 7}
+  ]
 }

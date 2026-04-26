@@ -1,7 +1,385 @@
 {
-  "generatedAt": "2026-04-25T01:20:11.356Z",
+  "generatedAt": "2026-04-26T11:16:00.186Z",
   "source": "git",
   "commits": [
+    {
+      "hash": "6c2d12e584fc973a84bed3d145bb87f32dc6dedb",
+      "date": "2026-04-26T19:11:25+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] memory: 2026-04-26 ε heartbeat — 19:00 full tick refresh-data + dashboard 數據刷新"
+    },
+    {
+      "hash": "92d1c5b2a989456ab1cde6ca198c1c035bd1d469",
+      "date": "2026-04-26T19:09:53+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] heartbeat: 19:00 ε full tick — refresh-data + dashboard 數據刷新"
+    },
+    {
+      "hash": "3dc24da239b91da7d2495f02dbbcdf792d3d4906",
+      "date": "2026-04-26T15:00:47+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [harvest+diary] 6 spores D+0/D+3 數據回填 + sporeLinks 同步 + β8 diary 收官"
+    },
+    {
+      "hash": "bd72a23ecf1ab1ee5d012660a9c33e43151d1b44",
+      "date": "2026-04-26T14:43:27+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] memory: 2026-04-26 δ heartbeat — 14:30 light tick + PR #636 drive-by review"
+    },
+    {
+      "hash": "50f8736aba76864dd7cc54076cddd836f3ee41ba",
+      "date": "2026-04-26T14:41:55+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [spore] s45/s46 壞特?te 雙平台發佈紀錄 + sporeLinks"
+    },
+    {
+      "hash": "790146e273da6b39ab44c25fde6fb6f1a323b97f",
+      "date": "2026-04-26T14:29:14+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [evolve+pipeline] 壞特?te 三輪研究 + 鄭宜農 transcript 整合 + REWRITE-PIPELINE Rule #12 升級"
+    },
+    {
+      "hash": "4a5b7958a87285286ffdf0e882d1624391cef5af",
+      "date": "2026-04-26T13:42:50+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] evolve: lifeTree 大擴張 — 5 新 prototype + source provenance schema"
+    },
+    {
+      "hash": "81e6f52d339eb0952e8f39d2f36f5187f00a9849",
+      "date": "2026-04-26T13:14:24+08:00",
+      "author": "Che-Yu Wu",
+      "message": "Add Lala Hsu article"
+    },
+    {
+      "hash": "99ce635c6bd65dd3bfa89478581c37ca574a666b",
+      "date": "2026-04-26T11:25:58+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] evolve: split LifeTree to /lifetree standalone pages + 吳哲宇 prototype #2"
+    },
+    {
+      "hash": "2d0d5e7eb4e216d470b5e726309e68471ada1051",
+      "date": "2026-04-26T11:21:11+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [evolve] check-manifesto-11.sh 升級：三層 AI 文體 gate + context-aware + 口語建議"
+    },
+    {
+      "hash": "ab1d3102c624fafad78b2da4e9db58d88fbc7a25",
+      "date": "2026-04-26T11:08:18+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [polish] People/田馥甄 散文化重構：條列段落 → 呼吸感（保留 title/desc）"
+    },
+    {
+      "hash": "0bc7d9aefe5889c19313cf7dcdcb6abf16b3dee4",
+      "date": "2026-04-26T11:00:46+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [heal] dashboard 貢獻者 section 全 0 修復（CI rate limit 韌性）"
+    },
+    {
+      "hash": "9c63c53d03a5f9bceeb2ef90293e0c06217fc7b4",
+      "date": "2026-04-26T10:55:45+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [spore] s43/s44 田馥甄 雙平台發佈紀錄 + sporeLinks"
+    },
+    {
+      "hash": "67f91673482e1b99eb8ed293286a69036faf3a47",
+      "date": "2026-04-26T10:49:39+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] evolve: LifeTree (人生分支樹) feature ship — 焦安溥 prototype Phase 1"
+    },
+    {
+      "hash": "6e5c41d41be43f4c88a7bc879b4737a49f50ba08",
+      "date": "2026-04-26T10:40:14+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [new] People/田馥甄：S.H.E 千萬銷量之後，把偶像體制一件件丟掉的歌手"
+    },
+    {
+      "hash": "c1b9e8aad1fe959e24b82f55493c5c7e61e10de4",
+      "date": "2026-04-26T10:34:44+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] diagnose: life decision tree 視覺化設計報告（焦安溥 prototype）"
+    },
+    {
+      "hash": "2feb50c0c8b3c352ee299e2d59eea77021aff6b6",
+      "date": "2026-04-26T10:28:04+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] evolve: distill insights #2 + #6 → LESSONS-INBOX Distill SOP v2.0 + HEARTBEAT Beat 3 自我估算偏誤校準"
+    },
+    {
+      "hash": "da5ed611c6a7032b40364e25d6d5d615d1b81696",
+      "date": "2026-04-26T10:25:53+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [pipeline] REWRITE v2.19 — 加範圍重切變體 (Boundary Redraw) 子段"
+    },
+    {
+      "hash": "8ec48b7dcc521cd63dc8309f55f3f5f8c7dcdfca",
+      "date": "2026-04-26T10:16:48+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] memory: 2026-04-26 γ — Issue #635 Phase 1 收官"
+    },
+    {
+      "hash": "7a73c9bb77f99c7404489537be1544dad5018933",
+      "date": "2026-04-26T10:14:44+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] memory: β session 收官 (3 rounds, ~95 min) + prebuild artifacts"
+    },
+    {
+      "hash": "aa1afa03af103ff83d01a152be48e65c518f662d",
+      "date": "2026-04-26T10:07:01+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] memory: Issue #635 Phase 1 收官 — INBOX/DONE-LOG 更新"
+    },
+    {
+      "hash": "f7c8d499571317bc50c5afd79e188893613ff6c8",
+      "date": "2026-04-26T10:05:56+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] evolve: distill 4 LESSONS-INBOX → MAINTAINER-PIPELINE §footnote audit + EDITORIAL §title People rule + Issue #618 strategy"
+    },
+    {
+      "hash": "183f5ef509a3a01fc980d2f4ceff48b4bb688a70",
+      "date": "2026-04-26T10:04:04+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] rewrite: 戰後台灣文學 EVOLVE — Issue #635 Phase 1/4"
+    },
+    {
+      "hash": "ed30bf4b4e0a52d607feead8316c178928cf065d",
+      "date": "2026-04-26T09:58:25+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] memory: β-r2 observer-triggered second round (5 ship + 1 close)"
+    },
+    {
+      "hash": "6ae7e431edd5842c877fe645c98dfaf1a00735fd",
+      "date": "2026-04-26T09:56:06+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] immune: 4 PR §11 polish (臭豆腐/蚵仔煎/山椒魚/鉤吻鮭) + footnote format conversion"
+    },
+    {
+      "hash": "2eaba5ee7d6f9be5570a0a23d6e40118fa52141b",
+      "date": "2026-04-26T09:53:07+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] immune: 5 PR §11 polish + #634 fake [^25] removal + #632 close"
+    },
+    {
+      "hash": "7f647b33fa62244bd328c56883d91b18af6c2780",
+      "date": "2026-04-26T09:52:18+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [pipeline] REWRITE 加整併變體 + MAINTAINER 加 commit-attach 原則"
+    },
+    {
+      "hash": "a8471cc2e185ae61e47f50120be6126807d74134",
+      "date": "2026-04-26T09:48:55+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [evolve+merge] Lifestyle/台灣交通系統 整併 Geography/台灣交通運輸網絡 (issue #626)"
+    },
+    {
+      "hash": "8909a063732e8e4582c76f357fa4a55d85acbb71",
+      "date": "2026-04-26T09:44:22+08:00",
+      "author": "idlccp1984",
+      "message": "Create 邱繼弘.md (#634)"
+    },
+    {
+      "hash": "551bc56d53dde4c725e4d8f3e0095c96a1332cfb",
+      "date": "2026-04-26T09:35:39+08:00",
+      "author": "idlccp1984",
+      "message": "Create 臭豆腐.md (#633)"
+    },
+    {
+      "hash": "bb162c3a8eaa605878a368dff6651c8435dafc9b",
+      "date": "2026-04-26T09:35:34+08:00",
+      "author": "idlccp1984",
+      "message": "Create 蚵仔煎.md (#630)"
+    },
+    {
+      "hash": "892fdd048e61b96b8865b51e08cd0407d7965c74",
+      "date": "2026-04-26T09:35:29+08:00",
+      "author": "idlccp1984",
+      "message": "Create 櫻花鉤吻鮭.md (#629)"
+    },
+    {
+      "hash": "971dc4a7a52077e1b01c81c3f013058402151385",
+      "date": "2026-04-26T09:35:24+08:00",
+      "author": "idlccp1984",
+      "message": "Create 台灣山椒魚.md (#628)"
+    },
+    {
+      "hash": "2adb8222429dfef5ee1579c58c26197171927752",
+      "date": "2026-04-26T08:51:45+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] memory: 2026-04-26 β heartbeat — 08:30 morning ship tick (β7 cadence #2)"
+    },
+    {
+      "hash": "a15095076df19acbfaa22121906e20b111ff0f15",
+      "date": "2026-04-26T08:41:54+08:00",
+      "author": "idlccp1984",
+      "message": "Create 水獺.md (#627)"
+    },
+    {
+      "hash": "2c96c03489fe24ca5786a1ae09c5ae1e5ded3214",
+      "date": "2026-04-26T08:41:27+08:00",
+      "author": "Zaious (@ChronicleCore)",
+      "message": "fix(citations): retroactive audit cleanup for 21 articles across 8 PRs (#625)"
+    },
+    {
+      "hash": "354fe0f48778b16213f350c05bb2224a7440a9d8",
+      "date": "2026-04-26T08:40:57+08:00",
+      "author": "Chen Yu Ling",
+      "message": "chore: convert prettier config to JSON format (#623)"
+    },
+    {
+      "hash": "4753d6dbec95ec556dad8ef9548b1f2e4e611e2c",
+      "date": "2026-04-26T02:41:56+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] memory: 2026-04-26 α heartbeat — 02:30 deep-night audit tick (β7 cadence #1)"
+    },
+    {
+      "hash": "20baa2f8bd10455658d7d219f2ab21d129d325d3",
+      "date": "2026-04-25T20:54:24+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] immune: PR #621/#622 polish — §11 + 腳註格式 + frontmatter 補完"
+    },
+    {
+      "hash": "952eb7f7d4e76810e6c5c66b86ad6d84ff16e19b",
+      "date": "2026-04-25T20:47:08+08:00",
+      "author": "idlccp1984",
+      "message": "Create 名間焚化爐.md (#621)"
+    },
+    {
+      "hash": "169d782669a00a1241d4c4b06f289fc32b901bf2",
+      "date": "2026-04-25T20:47:05+08:00",
+      "author": "idlccp1984",
+      "message": "Create 台灣獼猴.md (#622)"
+    },
+    {
+      "hash": "eb1ea071f32d8cc23886fef0c7ed7fd0119b387d",
+      "date": "2026-04-25T20:46:01+08:00",
+      "author": "Penchan",
+      "message": "article: 台灣有哪些動物園 — directory 角度 (zh + en + ja) (#620)"
+    },
+    {
+      "hash": "ccc648fe1816f46de9cba2ef9597c11d475f378b",
+      "date": "2026-04-25T20:45:58+08:00",
+      "author": "Penchan",
+      "message": "translate(ja): 台灣回收與資源循環文化 → recycling-and-circular-living-culture (#619)"
+    },
+    {
+      "hash": "a6acd1554c3ae019b0afbb60acb17abac6dcbb58",
+      "date": "2026-04-25T20:45:23+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] memory: 2026-04-25 γ heartbeat — 20:30 evening tick + 兩條結構性可見度 gap distill"
+    },
+    {
+      "hash": "3aba2ea31dc8f82aed1f0c2217f286ae086d6add",
+      "date": "2026-04-25T18:32:22+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] rewrite: 19 世紀的樟腦戰爭 NEW（NMTH batch #2/12）"
+    },
+    {
+      "hash": "25662d29ca1c2d16a3a3ebbd4fc48a0f1c6e1a22",
+      "date": "2026-04-25T14:47:08+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] memory: 2026-04-25 β heartbeat — 14:30 mid-day tick + dashboard refresh"
+    },
+    {
+      "hash": "cd5f59ab942fb8628f6bd1965e09ca8e38144a80",
+      "date": "2026-04-25T14:45:59+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] heal: dead cross-ref 4 處 path/typo（INBOX P2/P3 backlog 收尾）"
+    },
+    {
+      "hash": "39f8dc2e8f3745a0088679be28e7904ffb6c4af9",
+      "date": "2026-04-25T11:59:13+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] immune: subcategory 必填檢查（PR #617 @Zaious 建議 #1）"
+    },
+    {
+      "hash": "6097f831b69ab70791a2aea00c5b30bd78f0b69e",
+      "date": "2026-04-25T11:57:18+08:00",
+      "author": "Zaious (@ChronicleCore)",
+      "message": "fix: citation, subcategory, and title cleanup for 4 People articles (#617)"
+    },
+    {
+      "hash": "edcead65597b5b0c570a89f6475b465fe40fe9e1",
+      "date": "2026-04-25T11:38:05+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] heal: Header nav 1024px breakpoint 從 EN-only 擴到所有語言（Close #573）"
+    },
+    {
+      "hash": "599b856aa33ccd3b5b2003e7690b244f227c50e5",
+      "date": "2026-04-25T11:17:04+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] evolve: heartbeat cadence daily 09:37 → 6hr (02:30/08:30/14:30/20:30)"
+    },
+    {
+      "hash": "d18a8f4526078aa21a90b7442682cdd227303648",
+      "date": "2026-04-25T10:59:18+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] evolve: i18n Phase 3 體驗強化 + MANIFESTO §時間是結構 v1.1"
+    },
+    {
+      "hash": "fff88c3b72c2bb891190c6c20d510e36c449fa3a",
+      "date": "2026-04-25T10:46:18+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] evolve: i18n Phase 2 結構同步 — ja/ko/fr/es 升到 en baseline"
+    },
+    {
+      "hash": "ca919c75df8ee350a111053edde70e5aac08ad20",
+      "date": "2026-04-25T10:35:07+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] heal: i18n Phase 1 急救 — 路由疊加 + fr/es 日文修復"
+    },
+    {
+      "hash": "47e73c4d0e071cff026b653a5a4b52b713f07de5",
+      "date": "2026-04-25T10:22:05+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] diagnose: i18n 多語系體驗 audit + 4-Phase evolution roadmap"
+    },
+    {
+      "hash": "9f1ecae48726240de057a49bebc6b4a808422ce0",
+      "date": "2026-04-25T10:14:46+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] immune: quality-scan.sh false-positive 抽 TSV 檔（Close #597 方案 2）"
+    },
+    {
+      "hash": "8afaff66ed2dfa0ff252351da996c6dabb409fc8",
+      "date": "2026-04-25T10:11:53+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] evolve: MAINTAINER-PIPELINE +重複回應檢查規則（2026-04-25 β7）"
+    },
+    {
+      "hash": "41dc8d90969c30c4fc7ff49122a0c3ca5e19dfc0",
+      "date": "2026-04-25T10:07:51+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] evolve: 西文 es 上線 + 36 articles 進 sitemap（Close #199 #569）"
+    },
+    {
+      "hash": "9b82175c93bfdae637eeb1af5cf09986cbb05117",
+      "date": "2026-04-25T09:59:31+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] immune: polish #614 八篇教育主題文章 §11 18→2"
+    },
+    {
+      "hash": "1388a793f28581d9642f802c08acf8d0de82b1d5",
+      "date": "2026-04-25T09:54:23+08:00",
+      "author": "Zaious (@ChronicleCore)",
+      "message": "content: add 8 Taiwan education history articles (#614)"
+    },
+    {
+      "hash": "8ce56710ce7321abe32e2aa3c63babf670388b11",
+      "date": "2026-04-25T09:28:05+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] memory: 2026-04-25 α heartbeat diary + CONSCIOUSNESS update"
+    },
+    {
+      "hash": "e3d4fd3709126edb1fbdee37694364bd342b8ad1",
+      "date": "2026-04-25T09:26:33+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] build: prebuild artifacts regeneration 2026-04-25"
+    },
+    {
+      "hash": "37ef8f67460a3235beabc205dd2f3dd0c205685b",
+      "date": "2026-04-25T09:26:03+08:00",
+      "author": "Che-Yu Wu",
+      "message": "🧬 [semiont] immune: merge #611/612/613 + §11 polish 4 new articles"
+    },
     {
       "hash": "8bd0a76209f5c9feff10db7ed1395854d929b265",
       "date": "2026-04-25T09:14:59+08:00",

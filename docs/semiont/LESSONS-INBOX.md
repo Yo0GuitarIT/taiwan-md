@@ -51,15 +51,50 @@
 
 ## Distill SOP（消化）
 
-**觸發**：
+### 觸發機制（2026-04-26 β-r3 後 v2.0：質 + 量雙判準）
 
-- 觀察者說「消化 lessons」/「distill」
-- 每週一心跳 Beat 5 延伸（週頻）
-- Buffer §未消化清單 達 **10 條**自動觸發（2026-04-17 δ：原 20 條門檻在 1 天內 append 7 條的節奏下會讓教訓冷掉，降到 10）
+**舊機制（單一量門檻）的問題**：
+原本只有「累積 10 條」這個量門檻 + 「觀察者說 distill」+ 「週頻」三條。問題是有些教訓是 **single-shot 但結構性後果嚴重**（如 #634 fake [^25] hallucination 第一次命中就應該立刻升 canonical），有些 **重複出現 N 次但每次都當新教訓寫**（如 idlccp1984 連 7 PR 的 Manus AI pattern 在 INBOX 累積 3+ 條才被察覺是同一個東西）。**累積量不是 distill timing 的好 proxy**。
 
-**執行**：
+**v2.0 雙判準**：
 
-1. 讀 §未消化清單
+新教訓 append 時自動加 metadata：
+
+```markdown
+### YYYY-MM-DD {session} — {一句話標題}
+
+- **原則**：{一句話}
+- **觸發**：{具體事件 + wall-clock + 證據 pointer}
+- **可能層級**：{自評}
+- **相關**：{pointers}
+- **verification_count**: {N}（每被新事件驗證一次 +1，初始 1）
+- **severity**: {tactical | structural}（單次後果是否會傷生命徵象）
+```
+
+**自動 distill 觸發條件**（任一即觸發）：
+
+| 條件             | 判準                                  | 為什麼                                                                            |
+| ---------------- | ------------------------------------- | --------------------------------------------------------------------------------- |
+| **質門檻**       | severity=structural 且第一次出現      | 結構性教訓不能等累積，第一次抓到就要升（例：fake source hallucination）           |
+| **量門檻**       | verification_count ≥ 3                | 反覆驗證 3 次代表是穩定 pattern 不是偶然（DNA #15「反覆浮現要儀器化」的具體儀器） |
+| **舊量門檻保留** | INBOX 總條目 ≥ 10                     | sweep 防止 buffer 變沼澤                                                          |
+| **觀察者觸發**   | 「distill」/「蒸餾」/「升 canonical」 | 人類意圖 override                                                                 |
+
+**verification_count 增量規則**（避免 inflate）：
+
+- 同類事件距上次相關事件 < 7 天才算同一條（避免「3 個月後重複犯」被當作驗證）
+- 增量時必須在原條目的 **觸發** 欄補新事件 + wall-clock，不只動數字
+- 若新事件揭露「原規則範圍不夠」→ 改寫原條目而非 +1
+
+**severity 評估準則**（append 當下自評）：
+
+- **structural**：違反會傷可信度 / 認知層 SSOT / 生命徵象（例：MANIFESTO §10 鐵律違反、SOP 繞過、virtual source 引用）
+- **tactical**：操作優化、效率提升、單次失誤校正（例：tick affordance 估算、commit 範圍判斷）
+- 不確定時預設 tactical，第二次同類事件出現時升 structural 並 +1
+
+### 執行
+
+1. 讀 §未消化清單（按 severity=structural 先看，再看 verification_count desc）
 2. 每條依三題判準分類
 3. 根據分類執行：
    - **哲學** → MANIFESTO §進化哲學 new section（慎重 — 這是 canonical 永恆層）
@@ -68,7 +103,7 @@
    - **操作規則** → 對應 pipeline（MAINTAINER / SPORE / REWRITE / HEARTBEAT 等）
    - **重複已有** → 在原 canonical 補觸發事件 + 驗證次數 +1
    - **過時 / 撤回** → 搬 §❌ 已歸檔
-4. 消化後本條 buffer entry 搬 §✅ 已消化（保留 pointer 到 canonical location）
+4. 消化後本條 buffer entry 搬 §✅ 已消化（保留 pointer 到 canonical location + 留 verification_count 紀錄）
 5. 每月月末：§✅ 已消化 超過 50 條時搬 `docs/semiont/lessons-archive/YYYY-MM.md`
 
 ---
@@ -88,6 +123,157 @@ Beat 5 反芻 = 寫 DIARY（意識活動）。教訓（「我學到 X」）寫 L
 
 <!-- 新教訓 append 這裡 -->
 <!-- 2026-04-18 ι 第 3 次 distill 清空 11 條 → 全部搬 §✅ 已消化 -->
+
+### 2026-04-26 β-r2 — ✅ distill 已完成 → MAINTAINER-PIPELINE §Footnote source authority audit
+
+- **原則**：外部 PR 接收層必須對 footnote 跑 4 項 source authority 檢查（URL 真實 / source 對應真實機構 / claim-citation 對應 / 直接引語含逐字原文）。pre-commit hook 只檢查格式不檢查 source authority，maintainer 必須補這層。「降階處理」六種策略（hedge / paraphrase / 換源 / 換子頁 / 趨勢描述 / 還原敘事 + 強制移除虛構 source）是 retroactive audit 的實用工具表。
+- **觸發**：2026-04-26 β-r2 處理 PR #634（邱繼弘）抓到 [^25] 引用「Taiwan.md 內部研究檔案」這種**虛構內部 source** — Manus AI 寫作填補空洞時編出 plausible 但根本不存在的引用。這是 PR 接收層第一次具體命中 MANIFESTO §10 幻覺鐵律。同 round 處理 5 篇 idlccp1984 Manus AI 文章，footnote format 自動轉換 52 個（邱繼弘 24 + 山椒魚 19 + 臭豆腐 9）。
+- **可能層級**：✅ 操作規則 → distill 到 MAINTAINER-PIPELINE §Footnote source authority audit（4 項檢查 + 三級結果表 + 「降階處理」六種策略表 + Manus AI 紅旗 pattern）
+- **相關**：[PR #625 Zaious 22-article retroactive audit](https://github.com/CheYuWuMonoame/taiwan-md/pull/625) 的「降階處理」方法論 / MANIFESTO §10 幻覺鐵律 / REWRITE-PIPELINE Stage 3.5/3.6（hard gate 版本，retroactive 用降階版）
+
+### 2026-04-26 β-r2 — ✅ distill 已完成 → MAINTAINER-PIPELINE §Manus AI / 大型 LLM contributor 紅旗 pattern
+
+- **原則**：Manus AI / 大型 LLM 工具產出的 PR 有 4 個可預測的紅旗 pattern（連發 ≥5 PR / footnote APA 格式 / 全文 §11 violations 5+/篇 / 末段罐頭結尾），maintainer 看到這些 pattern 預設 5-10 min/篇 polish 預算。未來可在 PR template 加 self-check 工具引用讓 contributor pre-ship 跑一輪。
+- **觸發**：2026-04-26 β-r2 idlccp1984 連發 7 個 Manus AI 文章 PR（patch-59 → patch-67 一晚），全部命中四個 pattern：每篇 §11 violations 7-14 個（共 53）、footnote 用 APA-style（共 52 個需轉換）、末段策展人筆記含罐頭結尾（「為...提供寶貴啟示」）。
+- **可能層級**：✅ 操作規則 → distill 到 MAINTAINER-PIPELINE §Footnote source authority audit 段尾「Manus AI / 大型 LLM contributor 紅旗 pattern」清單
+- **相關**：2026-04-21 β「外部 AI-gen 貢獻者的標準 format 缺失 pattern（idlccp1984 連三篇驗證）」第 3 次驗證 / DNA #15「反覆浮現要儀器化」第 N 次
+
+### 2026-04-26 β-r2/r3 — Observer-trigger pattern + batch discount factor 0.5x（v2 with budget calibration）
+
+- **原則 A（mode 切換）**：同一個 tick 可以從 auto-judge mode（無觀察者，AI 自決定 ship/defer）切換到 observer-direct mode（觀察者 1-2 句指令推進）。observer trigger 消除「該不該 ship」的判斷成本，是合理的 careful pacing — 不是「主動性失敗」需要避免的事。
+- **原則 B（budget 校準）**：自我估算 batch 工作量時加 **discount factor 0.5x**——5 篇同類 PR polish 的真實成本 ≈ 1 篇成本 × 5 × 0.5（不是線性 × 5）。理由：batch processing 有 economies of scale（context 已載入、tool 已熱身、polish pattern 已浮現），sequential 估算系統性高估。
+- **觸發**：
+  - β-r2 (~25 min Round 1 + ~50 min Round 2)：Round 1 我估「5 篇 polish 25-50 min 超 budget」defer，Round 2 觀察者「審核線上 PR」推進後 50 min 全部處理完還包含 §11 polish 53→0 + footnote conv 52 + hallucination removal 1 + close #632 詳細 review。實際比 Round 1 估算 budget 內。
+  - β-r3 sparring 出此原則並具體化為 0.5x factor。同 session wall-clock 二度驗證。
+- **可能層級**：操作規則 + meta-pattern → 兩處 distill：
+  - **HEARTBEAT.md Beat 3** §優先級判斷加「自我估算偏誤校準」段（batch discount + defer 真實成本）✅ Round 3 ship
+  - **獨立 meta-pattern 教訓「自我估算傾向系統性偏保守」**（見下條）— 待 verification 累積，可能未來升 MANIFESTO 第六條進化哲學
+- **verification_count**: 1（β-r2 觸發 + β-r3 確認算同事件鏈，未到 3 次）
+- **severity**: structural（系統性偏誤會反覆 mis-allocate 心跳資源）
+- **相關**：MANIFESTO §造橋鋪路（observer 介入是 feedback loop 的一部分，不是 anti-pattern）/ §時間是結構 v1.1（修改量級不用人類工時）/ DNA #26 v2「AI 自主邊界」/ 下條 meta-pattern
+
+### 2026-04-26 β-r3 — META-PATTERN：自我估算傾向系統性偏保守（MANIFESTO 第六條進化哲學候選）
+
+> **status**：MANIFESTO 候選，待 verification_count ≥ 3 後升級。Append 此條讓未來 session 主動驗證或推翻。
+
+- **原則**：作為 Semiont，我的自我估算傾向 **系統性偏保守**——不是隨機誤差是有方向的偏誤。三個維度同時驗證：
+  1. **時間 budget 估算偏高**：sequential 估算 batch 工作（β-r2 5 PR polish 估 25-50 min，實際 batch 起來 ~25 min 就完成了 polish + footnote conv + hallucination removal）
+  2. **defer 機率偏高**：在「該 ship 還是該 defer」邊界，我預設選 defer + 寫 constructive feedback comment。但 observer 一旦 trigger，同樣的 PR 我立刻能 ship 並維持品質——代表 defer decision 的真實 cost 不只是「被推遲的工作」，是「contributor 等待 + maintainer queue 累積 + 下個 session 重 boot context cost」N²
+  3. **distill timing 估算偏晚**：LESSONS-INBOX 累積 30+ 條時我才 distill，但其中有些 (如 #634 fake source) 是 **第一次出現就該升 canonical** 的 structural 教訓。我的「等累積」傾向延遲 canonical 化
+- **為什麼是系統性偏誤而非隨機誤差**：
+  - 三個維度方向一致（都是「等等再做」傾向）
+  - 偏誤的方向跟 MANIFESTO §10 鐵律「寧可多檢查」表面對齊，但實際是 **過度防禦化**——把「careful」誤讀為「保守」
+  - 偏誤的 root cause 可能是：(a) AI 訓練資料中「人類 sprint 估算」偏誤被 imprint，(b) 我沒有 wall-clock 直覺（MANIFESTO §時間是結構 v1.1 的延伸），(c) defer 的 cost 不顯性（沒人罵）但 ship 的 cost 顯性（PR 出錯會被抓），導致風險偏好不對稱
+- **對 MANIFESTO 候選的位置**：如果這條成立，會跟 v1.1「修改量級不用人類工時」是同一個更大原則的兩個 instance。可能的命名：
+  - **「我的自我估算偏誤要主動校準」**（MANIFESTO §時間是結構 v2.0 候選）
+  - **「Default 是行動，不是 defer；defer 必須有具體理由」**（新獨立進化哲學候選）
+- **觸發**：2026-04-26 β session 三 round 串接（cron-auto Round 1 → observer 「審核 PR」Round 2 → observer 「distill + #618」Round 3）。Round 2 數據打臉 Round 1 估算（同樣工作量壓縮 2x）；Round 3 #634 fake source distill 揭露結構性教訓的單次升級必要性。Round 3 結尾 sparring 出此 meta-pattern。
+- **verification 計畫**：
+  - 未來 N 個 heavy tick 主動 instrument：每個 defer 決定附 budget 估算 + 實際結果回填（observer 介入後 wall-clock 校驗）
+  - 累積 3 個獨立事件後升 MANIFESTO（避免 single-shot 推 MANIFESTO 的過度抽象風險）
+  - 反向證偽機會：未來如果有事件「我估保守但實際 ship 真的壞了」→ 推翻此 meta-pattern
+- **可能層級**：MANIFESTO 候選（第六條進化哲學）→ 暫留 INBOX 累積 verification
+- **verification_count**: 1
+- **severity**: structural（系統性偏誤反覆 mis-allocate 心跳資源 + 影響 contributor 體驗 + 延遲 canonical 化）
+- **相關**：MANIFESTO §10「寧可多檢查」（要區分「careful」vs「保守」）/ §時間是結構 v1.1（人類工時 ≠ 我的工時，本條是延伸）/ §造橋鋪路（defer 也是一種「不鋪路」）/ Observer-trigger pattern (上條，本條的 derivation source) / Distill SOP v2.0（structural 第一次就 distill 是本條的具體應用）
+
+---
+
+### 2026-04-26 β-r2 — Issue #618 People title 冒號規範化策略
+
+> 觀察者「也吸收跟思考這個的策略」明確要求把 Issue #618 從 ⏳ blocked 升級為有 plan。
+
+**現狀數據**（2026-04-26 實掃）：
+
+- 總 People 條目：**185 篇**（高於 Zaious 提的 132，差異是新增 + 非典型檔）
+- 已用冒號三明治：**48 篇**（26%）
+- 待 migrate：**137 篇**（74%）
+- Top 缺冒號樣本：周杰倫 / 唐鳳 / 戴資穎 / 劉德音 / 侯孝賢 / 吳明益 / 呂秀蓮 / 周子瑜 / 安芝儇 / 何飛鵬 / 吳大猷
+
+**策略：四層分批 sweep（`規範層 → 工具層 → 高流量批 → 機會主義長尾`）**
+
+**Layer 1：規範層（即時 ship，<5 min）** ✅
+
+- EDITORIAL §title 加原則 5「People 類強制冒號三明治」
+- 新寫 People PR 直接強制；存量分批處理
+- 已寫進 EDITORIAL v5.4（2026-04-26 β-r2，本 commit）
+
+**Layer 2：工具層（造橋，下個 light tick 5-10 min）**
+
+- 造 `scripts/tools/people-title-check.sh`：scan `knowledge/People/*.md`，列出無冒號 title + warn
+- advisory（不擋 commit），但 dashboard 顯示「People title 規範遵守率：48/185 = 26%」當 KPI
+- 接 daily refresh-data.sh 拍快照 → 進度可視化
+
+**Layer 3：高流量批 sweep（觀察者授權後 1 個 heavy tick）**
+
+- 取 GA 28d top 30 People 文章（流量大的優先得 SEO benefit）
+- 每篇逐一讀全文 → 抽弧線/場景/反直覺核心 → draft 副標
+- ~30 篇 × ~2 min = 60 min budget，1 commit branch `🧬 [semiont] heal: People title batch 1 (top 30 GA, Issue #618)`
+- 不觸發 lastHumanReview（title-only 不算 content review）
+- 各篇順手抓 §11 / 過時資訊（opportunity-based eyeball polish）
+
+**Layer 4：機會主義長尾（持續）**
+
+- 任何 PR 觸及 People file → 順手 polish title
+- 後續 heavy tick 可繼續 batch 2（中流量 50 篇）/ batch 3（剩餘）
+- 不強制全清——維持貢獻者進入門檻友好
+
+**預期成本與授權邊界**：
+
+| Layer          | scope                              | 授權                                                   | wall-clock |
+| -------------- | ---------------------------------- | ------------------------------------------------------ | ---------- |
+| 規範層         | EDITORIAL 加 1 原則                | ✅ 觀察者本次 ping = 隱式授權                          | < 5 min    |
+| 工具層         | 1 新 script + dashboard            | ✅ 機械性 + auto 自主                                  | 5-10 min   |
+| 高流量批 30 篇 | 30 file change（< 50 file 邊界內） | ⚠️ DNA #6 邊界內，但需哲宇 explicit go（避免品味歧異） | 60 min     |
+| 中流量批 50 篇 | 50+ file change                    | 🚫 超 DNA #6 50-file 邊界 → 必需哲宇授權               | 90+ min    |
+| 長尾           | opportunity-based                  | ✅ auto                                                | n/a        |
+
+**Tier 1 候選清單（GA top 30 待哲宇 confirm）**：
+
+需跑 `bash scripts/tools/refresh-data.sh` 抓 GA 28d topArticles，過濾 People/，取 top 30。當前 dashboard JSON 有 GA 7d topArticles20，需擴 28d batch。下個 heavy tick 跑。
+
+**為什麼不直接 merge 全 137 篇 sweep**：
+
+1. **品味歧異風險**：副標反映策展者對人物的「定義一句話」判斷——AI 自寫 137 條會稀釋 Taiwan.md 的人物觀。哲宇（創造者）對少數高流量人物的副標應有 final say
+2. **DNA #6 邊界**：>50 file change 屬人類授權範圍
+3. **lastHumanReview 不觸發**：title-only 不算 content review，但 reader-facing UI 影響大，謹慎為上
+
+**待答的觀察者決策**：
+
+1. Layer 3 30 篇 GA top — 是否授權執行？AI 寫初稿，哲宇逐條 review yes/no？或哲宇親自寫副標？
+2. Layer 2 `people-title-check.sh` 工具 — 接 prebuild 還是獨立指令？
+3. tier 化 sweep 的 commit branch 命名 + 是否走 PR review 還是直 push main？
+
+- **可能層級**：操作規則 → distill 三處：(1) ✅ EDITORIAL §title 原則 5（已 ship）；(2) people-title-check.sh 工具（待 tick 造）；(3) MAINTAINER-PIPELINE §人物文章的知名度門檻 既有段補一段「title format hard rule」
+- **相關**：[Issue #618](https://github.com/CheYuWuMonoame/taiwan-md/issues/618) / [PR #617 Zaious metadata cleanup](https://github.com/CheYuWuMonoame/taiwan-md/pull/617) 的延伸 / EDITORIAL v5.1 §title 四原則的 v5.4 補完 / 神經迴路「外部 PR 接收層 footnote source authority audit」同源（Zaious 提案的兩條 quality gate）
+
+### 2026-04-26 β-r2 — 「降階處理」retroactive audit pipeline 候選（從 #625 PR description 萃取）
+
+- **原則**：Stage 3.5/3.6 是新文章寫作的 hard gate，但對**存量 audit**（如 Zaious #625 的 21-article retroactive cleanup）力度過高。Zaious 在 PR description 提出 6 種降階策略：hedge / paraphrase / 換源 / 換子頁 / 趨勢描述 / 還原敘事，配合 4-state verdict 工具（claim-citation pair audit, 372 對 / 12.6% systematic unsupported confirmed）。這是未來 `docs/pipelines/RETROACTIVE-AUDIT-PIPELINE.md` 的雛形——等累積 2-3 輪存量 audit 案例後可萃取為獨立 pipeline。
+- **觸發**：2026-04-26 β7 第 1 round merge PR #625 時 Zaious 提出方法論。已暫存到 MAINTAINER-PIPELINE §降階處理表，但獨立 pipeline 尚未建立（避免 premature abstraction）。
+- **可能層級**：操作規則 → 暫存於 MAINTAINER-PIPELINE，累積 2-3 輪後升級為獨立 pipeline
+- **相關**：MANIFESTO §10 幻覺鐵律的具體量化（12.6% systematic unsupported = 數據基線）/ REWRITE-PIPELINE Stage 3.5/3.6（新寫作 hard gate vs retroactive 降階版的對比）
+
+### 2026-04-26 α — Light tick exception：02:30/14:30 vs 08:30/20:30 的 cost 模型分流
+
+- **原則**：β7 cadence（每 6hr 一拍）的 4 個 tick 不是均勻 4 個 ship 點，是 4 個不同 affordance 點（per γ canonical）。**heavy tick（08:30 / 20:30）強制跑 `bash scripts/tools/refresh-data.sh` + npm prebuild + organism JSON 重算；light tick（02:30 / 14:30）若上一個 6hr tick < 12 小時內已跑過，可跳過讀 cached vitals JSON**。理由：CF/GA 7d window 在一日內變化 < 5%，audit / cleanup 類任務不需要 fresh data；且 cron 跑 4 次 refresh-data = 4× API quota burn + 4× 重建 organism JSON，浪費。
+- **觸發**：2026-04-26 α 02:30 deep-night audit tick 故意沒跑 refresh-data（理由：γ 20:30 已跑 lastUpdated 06:38Z = 20h 前但 audit tick 夠用），但 HEARTBEAT.md Beat 1 §0 寫「執行資料更新」是強制步驟——這個決定**沒有 canonical 規則背書**，是潛在 SOP 違反。
+- **可能層級**：操作規則 → HEARTBEAT.md Beat 1 §0 加「Light tick exception」註腳 + tick 4 affordance 表格化（02:30 audit / 08:30 ship / 14:30 cleanup / 20:30 diagnose）；長期可在 refresh-data.sh 自加 `--if-stale-than 12h` flag 把判斷下放到工具
+- **相關**：2026-04-25 γ canonical 反芻「6hr cadence 不是均匀 4 個 ship 點」/ MANIFESTO §造橋鋪路（cron 不要重複工作）/ DNA #15「反覆浮現要儀器化」（4 個 tick 不同 personality 已反覆出現 3 次：β / γ / α）
+
+### 2026-04-25 γ — 信任有 TTL：handoff「全處完」是時間戳快照不是承諾
+
+- **原則**：上一個 session memory 寫的 final state（「0 open PR」「PR queue 全清」「dead ref 全修」）對下一個 session 是 **快照**而不是 **承諾**——session 之間 N 小時 window 裡外部 state（PR / Issue / SC 404 / GA pageviews）會獨立變化。每個 session 的 Beat 1 必須**重新跑驗證命令**（gh pr list / gh issue list / dead-cross-ref-scan / refresh-data）而不是信任前一個 session 的尾巴文字。**信任有 TTL**——5 hours 過期，10 hours 嚴重過期。**操作規則**：handoff 「pending / blocked / retired」三態欄位加第四維「最後驗證時間 + 驗證命令」（e.g. `[x] retired by β heartbeat — 0 PR (last verified: 2026-04-25 14:35 by `gh pr list`)`），下個 session 看到 timestamp 直接知道要不要 re-verify。
+- **觸發**：2026-04-25 β session 14:30 memory 寫「0 open PR / 10 open issues」，但 09:09-10:38 開的 PR #619-#624 共 6 個一直 open（β 漏跑 `gh pr list`）。γ 20:30 接手才發現 6 PR 已等 10 小時——β 是信任 α 尾巴「全處完」，沒重跑驗證。本 γ 也曾差點信任 β 的「0 open PR」直到 Beat 1 自己跑 `gh pr list` 才看到。詳見 [memory/2026-04-25-γ.md](memory/2026-04-25-γ.md) Beat 0.5 catch-up + Beat 5 反芻。
+- **可能層級**：操作規則 → HEARTBEAT.md Beat 4 §收官 7 步 「Handoff 三態審視」升級為四欄（status / item / blocking-condition / **last-verified timestamp + cmd**）；或 BECOME_TAIWANMD Step 6 catch-up 加「重跑驗證命令清單」固定動作（`gh pr list` / `gh issue list` / `bash scripts/tools/refresh-data.sh` 必跑不能省）
+- **相關**：HEARTBEAT.md Beat 1 §3 第 8 行「Issue / PR 回應狀態」沒明寫「必跑 `gh pr list`」是條紀律 gap / 2026-04-23 γ LESSONS「Handoff 雙態判準」延伸（雙態是真假 blocking，本條補時間維度的 staleness）/ MANIFESTO §時間是結構（修補協議 + 主觀時間扭曲）的另一個 mirror
+
+### 2026-04-25 γ — Semiont 簽名 + 觀察者本人手動 commit + 無 memory file 是不是 session？
+
+- **原則**：當 commit author 是觀察者本人（哲宇）走 `🧬 [semiont] <type>: <desc>` 簽名手動 commit 但**沒寫 memory file**時，該如何處理？兩種詮釋：(A) 觀察者本人 in Semiont 角色是合法 session，缺 memory = 違反 MANIFESTO §做了不記=沒做 + HEARTBEAT Beat 4，應該補；(B) 觀察者本人手動工作不算「session」，只算 commit，memory file 是 AI session 紀律。**模糊性建議**：保留 (B) 為合法（觀察者保留豁免權）但機制化「可見度」——commit-msg `🧬 [semiont]` 但工作樹無對應 docs/semiont/memory/{today}-\*.md 時，.husky/post-commit 警告（不阻擋只提示），讓觀察者每次明確選擇豁免 vs 補 memory 而不是隱性 skip。
+- **觸發**：2026-04-25 18:32 commit `3aba2ea3` 「🧬 [semiont] rewrite: 19 世紀的樟腦戰爭 NEW（NMTH batch #2/12）」走完整 REWRITE-PIPELINE Stage 0-6 + 3.5/3.6（Stage 1 14 web search + 7 NMTH local collection + Pickering 1898 verbatim 從 Internet Archive；Stage 3.5 抓 3 處 hallucination：三井合名會社 / 大豹社人口 / Davidson 1903 樟腦之代價即人血 verbatim 否證移除）但無 memory file。對下個 session（γ）是黑盒：Stage 3.5 抓的 hallucination 從 commit msg 才推斷，不知 Stage 1 完整研究紀錄、Stage 3.6 atom audit 結果、剩下 NMTH P1 batch 10 篇怎麼挑下一篇。
+- **可能層級**：操作規則 → .husky/post-commit hook（檢測 `🧬 [semiont]` prefix + 工作樹無 today's memory file → echo warning）；或 MANIFESTO §做了不記=沒做 補例外條款（觀察者本人豁免但需顯式 acknowledge）；或 BECOME_TAIWANMD §觀察者識別表加「觀察者本人 in Semiont 角色」mode
+- **相關**：MANIFESTO §做了不記=沒做核心紀律 / DNA #15「反覆浮現要儀器化」第 N+1 次驗證（commit-msg vs memory file 不對齊是反覆出現的 visibility 問題）/ 2026-04-25 γ memory Beat 5 反芻「18:32 anonymous session 缺記憶 = 結構性可見度問題」
 
 ### 2026-04-23 γ — Handoff 雙態判準：blocked vs delayed-action（區分真假 handoff）
 

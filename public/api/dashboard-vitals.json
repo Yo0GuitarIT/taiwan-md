@@ -1,18 +1,18 @@
 {
-  "lastUpdated": "2026-04-25T06:38:12.309Z",
-  "totalArticles": 570,
+  "lastUpdated": "2026-04-26T11:16:00.101Z",
+  "totalArticles": 582,
   "contributors": 61,
-  "articlesLast7Days": 104,
-  "articlesLast30Days": 269,
-  "humanReviewedPercent": 98.9,
-  "featuredPercent": 27.2,
+  "articlesLast7Days": 119,
+  "articlesLast30Days": 284,
+  "humanReviewedPercent": 99,
+  "featuredPercent": 26.8,
   "avgRevision": 6.9,
   "languageCoverage": {
-    "zh-TW": 570,
+    "zh-TW": 582,
     "en": 407,
-    "ja": 268,
-    "ko": 482,
+    "ja": 269,
+    "ko": 481,
     "es": 36,
-    "fr": 479
+    "fr": 478
   }
 }
